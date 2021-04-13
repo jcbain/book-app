@@ -16,8 +16,10 @@ function App() {
   const [ loaded, setLoaded ] = useState(false);
   const [ newBookData, setNewBookData ] = useState({title: '', author: ''});
 
+  const API = axios.create({baseURL: 'http://localhost:8000/'})
+
   useEffect(() => {
-    axios.get('http://localhost:8000/books')
+    API.get('books')
       .then(res => {
         setAppBookData(res.data)
         setLoaded(true)
@@ -34,8 +36,8 @@ function App() {
   const addBook = () => {
     if (newBookData.title && newBookData.author){
       const addedBook = {...newBookData, read: false, id: appBookData.length + 1}
-      axios.post('http://localhost:8000/addbook', addedBook)
-        .then(status => {
+      API.post('addbook', addedBook)
+        .then(res => {
           setAppBookData( prev => {
             return [...prev, addedBook]
           })
@@ -47,13 +49,14 @@ function App() {
   }
 
   const readBook = (index) => {
-    setAppBookData(prev => {
-      let books = [...prev];
-      let singleBook = {...books[index], read: !books[index].read};
-      books[index] = singleBook;
-      axios.put(`http://localhost:8000/books/${index}`, singleBook)
-      return books
-    })
+    let books = [...appBookData];
+    let singleBook = {...books[index], read: !books[index].read};
+    books[index] = singleBook;
+    API.put(`books/${index}`, singleBook)
+      .then(res => {
+        setAppBookData(books)
+      })
+      .catch(err => console.log(err));
   }
 
   return (
