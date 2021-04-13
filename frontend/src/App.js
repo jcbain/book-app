@@ -17,7 +17,7 @@ function App() {
   const [ newBookData, setNewBookData ] = useState({title: '', author: ''});
 
   useEffect(() => {
-    axios.get('http://localhost:8000')
+    axios.get('http://localhost:8000/books')
       .then(res => {
         setAppBookData(res.data)
         setLoaded(true)
@@ -25,7 +25,7 @@ function App() {
       .catch(err => console.log(err))
   }, [])
 
-  const updateNewBookData = (key, ) => {
+  const updateNewBookData = (key) => {
     return (value) => setNewBookData( prev => {
       return { ...prev, [key]: value}
     })
@@ -33,17 +33,33 @@ function App() {
 
   const addBook = () => {
     if (newBookData.title && newBookData.author){
-      setAppBookData( prev => {
-        return [...prev, {...newBookData, read: false, id: prev.length + 1}]
-      })
-      setNewBookData({title: '', author: ''})
+      const addedBook = {...newBookData, read: false, id: appBookData.length + 1}
+      axios.post('http://localhost:8000/addbook', addedBook)
+        .then(status => {
+          setAppBookData( prev => {
+            return [...prev, addedBook]
+          })
+          setNewBookData({title: '', author: ''})
+        })
+        .catch(err => console.log(err))
+      
     }
+  }
+
+  const readBook = (index) => {
+    setAppBookData(prev => {
+      let books = [...prev];
+      let singleBook = {...books[index], read: !books[index].read};
+      books[index] = singleBook;
+      axios.put(`http://localhost:8000/books/${index}`, singleBook)
+      return books
+    })
   }
 
   return (
     <div className="App">
       <BookForm newBookData={newBookData} updateNewBookData={updateNewBookData} addBook={addBook}/>
-      {loaded && <BookList bookData={appBookData} />}
+      {loaded && <BookList bookData={appBookData} readBook={readBook}/>}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-const BookList = ({bookData}) => {
+const BookList = ({bookData, readBook}) => {
 
     return (
         <div>
@@ -12,7 +12,7 @@ const BookList = ({bookData}) => {
           </tr>
           </thead>
           <tbody>
-          {bookData.map(book => {
+          {bookData.map((book, i) => {
             return (
               <tr key={book.id}>
                 <td>
@@ -24,7 +24,7 @@ const BookList = ({bookData}) => {
                 <td>
                   <input type="checkbox"
                     checked={book.read}
-                    onChange={() => console.log('heelo')}/>
+                    onChange={() => readBook(i)}/>
                 </td>
                 
               </tr>
