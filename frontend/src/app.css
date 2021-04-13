@@ -1,0 +1,23 @@
+.App {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 800px;
+    margin: 20px auto;
+    column-gap: 100px;
+}
+
+h2.title {
+    margin-bottom: 10px;
+}
+
+.book-list  tr {
+    height: 30px;
+}
+
+.book-list th {
+    text-align: left;
+}
+
+td {
+    padding-right: 10px;
+}

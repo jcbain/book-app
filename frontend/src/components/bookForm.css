@@ -1,0 +1,13 @@
+.book-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.form-submit {
+    max-width: 400px;
+    background: #303030;
+    color: #fff;
+    height: 40px;
+}

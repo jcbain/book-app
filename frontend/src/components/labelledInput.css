@@ -1,0 +1,33 @@
+.input-wrapper {
+    max-width: 400px;
+    position: relative;
+    height: 50px;
+}
+
+.input-wrapper label {
+    position: absolute;
+    top: -7px;
+    left: 5px;
+    font-size: 14px;
+    background: white;
+    padding: 0px 2px;
+}
+
+.input-wrapper input {
+    color: #303030;
+    height: 100%;
+    width: calc(100% - 11px);
+    border: 2px solid #303030;
+    font-size: 18px;
+    border-radius: 3px;
+    padding-left: 7px;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
