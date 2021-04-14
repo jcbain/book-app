@@ -3,7 +3,8 @@ const app = express();
 const cors = require('cors');
 const port = 8000;
 
-app.use(cors());
+// middleware
+app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
