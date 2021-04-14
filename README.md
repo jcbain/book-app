@@ -2,7 +2,7 @@
 
 A sample app from back to front. Keep a list of books you want to read and mark them off when you're finished with them. A demonstration application built with React and Express.
 
-![Application image](./docs/app.png)
+![Application image](./docs/images/app.png)
 
 ## Installation and Running
 
