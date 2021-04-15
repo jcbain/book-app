@@ -14,13 +14,14 @@ app.get('/books', (req, res) => {
 
 });
 
+app.post('/books', (req, res) => {
+
+});
+
 app.put('/books/:index', (req, res) => {
 
 });
 
-app.post('/addbook', (req, res) => {
-
-});
 
 app.listen(port, () => {
     console.log(`server firing 🔥 on a couple cylinders on port ${port}`)
