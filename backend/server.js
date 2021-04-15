@@ -4,7 +4,9 @@ const cors = require('cors');
 const port = 8000;
 
 // middleware
+// allows for requests to be made from localhost 3000
 app.use(cors({ origin: 'http://localhost:3000', optionsSuccessStatus: 200 }));
+// adds ability to send data from request and accessed in req.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

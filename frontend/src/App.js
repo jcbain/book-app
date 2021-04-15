@@ -11,39 +11,43 @@ const defaultBooks = [
 ]
 
 function App() {
-  const [ appBookData, setAppBookData ] = useState(defaultBooks)
+  const [ booksData, setBooksData ] = useState(defaultBooks)
   const [ newBookData, setNewBookData ] = useState({title: '', author: ''});
 
-
+  // helper functions
+  // updates new book form input to newBookData state variable
   const updateNewBookData = (key) => {
     return (value) => setNewBookData( prev => {
       return { ...prev, [key]: value}
     })
   }
 
+  // updates booksData state variable by adding a new book
+  // to the array
   const addBook = () => {
     if (newBookData.title && newBookData.author){
-      const addedBook = {...newBookData, read: false, id: appBookData.length + 1} 
-      setAppBookData( prev => {
+      const addedBook = {...newBookData, read: false, id: booksData.length + 1} 
+      setBooksData( prev => {
         return [...prev, addedBook]
       })
       setNewBookData({title: '', author: ''})
-
+    }
   }
-}
 
+  // updates the booksData at a given index by setting a new
+  // read boolean value
   const readBook = (index) => {
-    let books = [...appBookData];
+    let books = [...booksData];
     let singleBook = {...books[index], read: !books[index].read};
     books[index] = singleBook;
-    setAppBookData(books)
+    setBooksData(books)
 
   }
 
   return (
     <div className="App">
       <BookForm newBookData={newBookData} updateNewBookData={updateNewBookData} addBook={addBook}/>
-      <BookList bookData={appBookData} readBook={readBook}/>
+      <BookList bookData={booksData} readBook={readBook}/>
     </div>
   );
 }
