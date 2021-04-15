@@ -1,6 +1,6 @@
 import './labelledInput.css'
 
-const LabelledInput = ({ value, onInputChange, placeholder, label, inputId, ...rest }) => {
+const LabelledInput = ({ inputValue, onInputChange, placeholder, label, inputId, ...rest }) => {
 
     const handleChange = event => {
         onInputChange(event.target.value);
@@ -9,7 +9,7 @@ const LabelledInput = ({ value, onInputChange, placeholder, label, inputId, ...r
     return (
         <div className={'input-wrapper'} {...rest}>
             <label htmlFor={inputId}>{label} </label>
-            <input id={inputId} type="text" onChange={handleChange} value={value} placeholder={placeholder}/>
+            <input id={inputId} type="text" onChange={handleChange} value={inputValue} placeholder={placeholder}/>
         </div>
         
     )
