@@ -21,14 +21,14 @@ app.get('/books', (req, res) => {
 app.post('/books', (req, res) => {
     const book = req.body;
     bookDB.push(book)
-    res.end();
+    res.sendStatus(200);
 });
 
 app.put('/books/:index', (req, res) => {
     const { index } = req.params
     const book = req.body;
     bookDB[index] = book;
-    res.end();
+    res.sendStatus(200);
 });
 
 
