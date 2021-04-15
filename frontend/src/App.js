@@ -6,7 +6,7 @@ import BookList from './components/BookList';
 import './app.css'
 
 function App() {
-  const [ appBookData, setAppBookData ] = useState([])
+  const [ booksData, setBooksData ] = useState([])
   const [ loaded, setLoaded ] = useState(false);
   const [ newBookData, setNewBookData ] = useState({title: '', author: ''});
 
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     API.get('books')
       .then(res => {
-        setAppBookData(res.data)
+        setBooksData(res.data)
         setLoaded(true)
       })
       .catch(err => console.log(err))
@@ -29,10 +29,10 @@ function App() {
 
   const addBook = () => {
     if (newBookData.title && newBookData.author){
-      const addedBook = {...newBookData, read: false, id: appBookData.length + 1}
-      API.post('addbook', addedBook)
+      const addedBook = {...newBookData, read: false, id: booksData.length + 1}
+      API.post('books', addedBook)
         .then(res => {
-          setAppBookData( prev => {
+          setBooksData( prev => {
             return [...prev, addedBook]
           })
           setNewBookData({title: '', author: ''})
@@ -43,12 +43,12 @@ function App() {
   }
 
   const readBook = (index) => {
-    let books = [...appBookData];
+    let books = [...booksData];
     let singleBook = {...books[index], read: !books[index].read};
     books[index] = singleBook;
     API.put(`books/${index}`, singleBook)
       .then(res => {
-        setAppBookData(books)
+        setBooksData(books)
       })
       .catch(err => console.log(err));
   }
@@ -56,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <BookForm newBookData={newBookData} updateNewBookData={updateNewBookData} addBook={addBook}/>
-      {loaded && <BookList bookData={appBookData} readBook={readBook}/>}
+      {loaded && <BookList bookData={booksData} readBook={readBook}/>}
     </div>
   );
 }

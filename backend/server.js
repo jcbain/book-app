@@ -18,6 +18,12 @@ app.get('/books', (req, res) => {
     res.json(bookDB)
 });
 
+app.post('/books', (req, res) => {
+    const book = req.body;
+    bookDB.push(book)
+    res.end();
+});
+
 app.put('/books/:index', (req, res) => {
     const { index } = req.params
     const book = req.body;
@@ -25,11 +31,7 @@ app.put('/books/:index', (req, res) => {
     res.end();
 });
 
-app.post('/addbook', (req, res) => {
-    const book = req.body;
-    bookDB.push(book)
-    res.end();
-});
+
 
 app.listen(port, () => {
     console.log(`server firing 🔥 on a couple cylinders on port ${port}`)
